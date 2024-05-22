@@ -1,0 +1,135 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  background-color: rgb(186, 73, 73);
+  transition: background-color 200ms ease-in;
+}
+
+header {
+  max-width: 80%;
+  margin: 30px auto;
+
+  padding-bottom: 30px;
+  border-bottom: 2px solid rgba(68, 68, 68, 0.5);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: #fff;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 3px;
+  transition: transform 200ms;
+}
+
+.nav-link:hover {
+  transform: scale(1.05);
+}
+
+/* POMODORO TIMER */
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  height: 400px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 30px 0;
+}
+
+.timer-btns-container {
+  display: flex;
+  gap: 24px;
+}
+
+button {
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-timer {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  padding: 10px 28px;
+  border-radius: 5px;
+  transition-property: color, background-color, transform;
+  transition-duration: 250ms;
+}
+
+.btn-timer:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-timer:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(10px);
+}
+
+.timer {
+  font-family: "Roboto";
+  font-size: 144px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-start {
+  font-size: 24px;
+  color: #333;
+  background-color: #fff;
+  padding: 10px 56px;
+  border-radius: 3px;
+  box-shadow: 0px 5px 0px rgba(255, 255, 255, 0.6);
+  transition-property: box-shadow, transform;
+  transition-duration: 100ms;
+}
+
+.btn-start:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+/* Added programmatically */
+
+.btn-clicked {
+  background-color: rgba(255, 255, 255, 0.1);
+}
