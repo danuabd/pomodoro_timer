@@ -1,5 +1,7 @@
 # pomodoro_timer
 
+https://danuabd.github.io/pomodoro_timer/
+
 Pomodoro timer lets you manage your time to get rest between work times and increase your work efficiency.
 
 I created this project to test my JS and CSS skills in this project. Huge thanks to my teacher, Jonas and the Odin project.
