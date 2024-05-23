@@ -9,6 +9,7 @@ body {
   color: #fff;
   background-color: rgb(186, 73, 73);
   transition: background-color 200ms ease-in;
+  height: 100vh;
 }
 
 header {
@@ -74,6 +75,7 @@ a:link {
   margin: 0 auto;
   border-radius: 5px;
   padding: 44px 0;
+  margin-bottom: 120px;
 }
 
 .timer-btns-container {
@@ -132,8 +134,21 @@ button {
   box-shadow: none;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  height: 80px;
+}
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Added programmatically */
 
 .btn-clicked {
-  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
 }

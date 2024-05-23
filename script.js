@@ -9,8 +9,9 @@ const btnLongBreak = document.querySelector(".long-break");
 const timerMinutes = document.querySelector(".minutes");
 const timerSeconds = document.querySelector(".seconds");
 const btnStartTimer = document.querySelector(".btn-start");
+const year = document.querySelector(".year");
 
-// Initiate time
+// Set initial time
 let time = 25 * 60;
 
 // Declare timer in global scope
@@ -20,13 +21,24 @@ let timer;
 const audioBtnClick = new Audio("audio/pop-sound.mp3");
 const audioAlarm = new Audio("audio/alarm.mp3");
 
+// Set current year
+year.textContent = new Date().getFullYear();
+
+// Read time from clock
+const getDisplayedTime = function () {
+  return (
+    Number(timerMinutes.textContent) * 60 + Number(timerSeconds.textContent)
+  );
+};
+
 // Change bg color, time, etc.
 const changeTimer = function (btn, bgColor, minute, seconds) {
   timerBtns.forEach((btn) => btn.classList.remove("btn-clicked"));
   btn.classList.add("btn-clicked");
   document.body.style.backgroundColor = bgColor;
-  timerMinutes.textContent = minute;
-  timerSeconds.textContent = seconds;
+  timerMinutes.textContent = String(minute).padStart(2, 0);
+  timerSeconds.textContent = String(seconds).padStart(2, 0);
+  time = minute * 60 + seconds;
 };
 
 // Starting the timer
@@ -52,6 +64,7 @@ const startTimer = function () {
   return timer;
 };
 
+// Change start button state to 'pause' or 'start'
 const changebtnState = function () {
   if (btnStartTimer.classList.contains("started")) {
     btnStartTimer.textContent = "Pause";
@@ -61,11 +74,10 @@ const changebtnState = function () {
 };
 
 // Pause the timer
-const pauseTimer = function () {
+const pauseTimer = function (pausedTimer) {
   if (timer) {
     clearInterval(timer);
-    time =
-      Number(timerMinutes.textContent) * 60 + Number(timerSeconds.textContent);
+    time = getDisplayedTime();
   }
 };
 
@@ -88,14 +100,11 @@ selectionContainer.addEventListener("click", function (e) {
   changebtnState();
 
   if (e.target.classList.contains("pomodoro")) {
-    changeTimer(e.target, "rgb(186, 73, 73)", "25", "00");
-    time = 25 * 60;
+    changeTimer(e.target, "rgb(186, 73, 73)", 25, 0);
   } else if (e.target.classList.contains("short-break")) {
-    changeTimer(e.target, "rgb(56, 133, 138)", "05", "00");
-    time = 5 * 60;
+    changeTimer(e.target, "rgb(56, 133, 138)", 5, 0);
   } else if (e.target.classList.contains("long-break")) {
-    changeTimer(e.target, "rgb(57, 112, 151)", "15", "00");
-    time = 15 * 60;
+    changeTimer(e.target, "rgb(57, 112, 151)", 15, 0);
   }
 });
 
@@ -104,7 +113,10 @@ btnStartTimer.addEventListener("click", function (e) {
 
   // Check condition to pause timer
   if (e.target.classList.contains("started")) pauseTimer();
-  else timer = startTimer();
+  else {
+    time = getDisplayedTime();
+    timer = startTimer();
+  }
 
   // Add a class to pause timer when clicked again
   e.target.classList.toggle("started");
