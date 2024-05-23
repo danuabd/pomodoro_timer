@@ -1,6 +1,6 @@
 "use strict";
 
-// select elements
+// Select elements
 const selectionContainer = document.querySelector(".timer-btns-container");
 const btnPomodoro = document.querySelector(".pomodoro");
 const timerBtns = document.querySelectorAll(".btn-timer");
@@ -10,17 +10,17 @@ const timerMinutes = document.querySelector(".minutes");
 const timerSeconds = document.querySelector(".seconds");
 const btnStartTimer = document.querySelector(".btn-start");
 
-// initiate time
+// Initiate time
 let time = 25 * 60;
 
-// declare timer in global scope
+// Declare timer in global scope
 let timer;
 
 // load audio files
 const audioBtnClick = new Audio("audio/pop-sound.mp3");
 const audioAlarm = new Audio("audio/alarm.mp3");
 
-// change bg color, time, etc.
+// Change bg color, time, etc.
 const changeTimer = function (btn, bgColor, minute, seconds) {
   timerBtns.forEach((btn) => btn.classList.remove("btn-clicked"));
   btn.classList.add("btn-clicked");
@@ -29,7 +29,7 @@ const changeTimer = function (btn, bgColor, minute, seconds) {
   timerSeconds.textContent = seconds;
 };
 
-// starting the timer
+// Starting the timer
 const startTimer = function () {
   const tick = function () {
     time--;
@@ -52,7 +52,15 @@ const startTimer = function () {
   return timer;
 };
 
-// pause the timer
+const changebtnState = function () {
+  if (btnStartTimer.classList.contains("started")) {
+    btnStartTimer.textContent = "Pause";
+  } else {
+    btnStartTimer.textContent = "Start";
+  }
+};
+
+// Pause the timer
 const pauseTimer = function () {
   if (timer) {
     clearInterval(timer);
@@ -61,7 +69,7 @@ const pauseTimer = function () {
   }
 };
 
-// play sound
+// Play sound
 const playSound = function (alarm) {
   if (alarm) audioAlarm.play();
   else audioBtnClick.play();
@@ -69,14 +77,15 @@ const playSound = function (alarm) {
 
 // Event listeners
 selectionContainer.addEventListener("click", function (e) {
-  // close guard
+  // Close guard
   if (!e.target.classList.contains("btn-timer")) return;
 
-  // clear timer if already started
+  // Clear timer if already started
   if (timer) clearInterval(timer);
 
-  // remove pause timer condition
+  // Change start button state
   btnStartTimer.classList.remove("started");
+  changebtnState();
 
   if (e.target.classList.contains("pomodoro")) {
     changeTimer(e.target, "rgb(186, 73, 73)", "25", "00");
@@ -93,10 +102,13 @@ selectionContainer.addEventListener("click", function (e) {
 btnStartTimer.addEventListener("click", function (e) {
   playSound();
 
-  // check condition to pause timer
+  // Check condition to pause timer
   if (e.target.classList.contains("started")) pauseTimer();
   else timer = startTimer();
 
-  // add a class to pause timer when clicked again
+  // Add a class to pause timer when clicked again
   e.target.classList.toggle("started");
+
+  // Change start button text
+  changebtnState();
 });
