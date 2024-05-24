@@ -9,10 +9,12 @@ const btnLongBreak = document.querySelector(".long-break");
 const timerMinutes = document.querySelector(".minutes");
 const timerSeconds = document.querySelector(".seconds");
 const btnStartTimer = document.querySelector(".btn-start");
+const progressBar = document.querySelector(".progressbar");
 const year = document.querySelector(".year");
 
 // Set initial time
 let time = 25 * 60;
+let progressBarFill = 0;
 
 // Declare timer in global scope
 let timer;
@@ -31,18 +33,21 @@ const getDisplayedTime = function () {
   );
 };
 
-// Change bg color, time, etc.
+// Change bg color, time, progress bar etc.
 const changeTimer = function (btn, bgColor, minute, seconds) {
   timerBtns.forEach((btn) => btn.classList.remove("btn-clicked"));
   btn.classList.add("btn-clicked");
   document.body.style.backgroundColor = bgColor;
+  progressBar.style.width = "0%";
   timerMinutes.textContent = String(minute).padStart(2, 0);
   timerSeconds.textContent = String(seconds).padStart(2, 0);
   time = minute * 60 + seconds;
+  progressBarFill = 0;
 };
 
 // Starting the timer
 const startTimer = function () {
+  const fill = 100 / time;
   const tick = function () {
     time--;
     let minute = String(Math.trunc(time / 60));
@@ -50,6 +55,7 @@ const startTimer = function () {
 
     timerMinutes.textContent = `${minute.padStart(2, "0")}`;
     timerSeconds.textContent = `${second.padStart(2, "0")}`;
+    fillProgressBar(fill);
 
     if (time === 0) {
       clearInterval(timer);
@@ -57,11 +63,18 @@ const startTimer = function () {
     }
   };
 
-  const timer = setInterval(tick, 1000);
-
   // reduce time by 1 at first
   tick();
+
+  const timer = setInterval(tick, 1000);
+
   return timer;
+};
+
+// progress bar
+const fillProgressBar = function (fill) {
+  progressBarFill += fill;
+  progressBar.style.width = `${progressBarFill}%`;
 };
 
 // Change start button state to 'pause' or 'start'
