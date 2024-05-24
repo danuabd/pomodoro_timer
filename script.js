@@ -10,6 +10,8 @@ const timerMinutes = document.querySelector(".minutes");
 const timerSeconds = document.querySelector(".seconds");
 const btnStartTimer = document.querySelector(".btn-start");
 const progressBar = document.querySelector(".progressbar");
+const quoteText = document.querySelector(".quote-text");
+const quoteAuthor = document.querySelector(".quote-author");
 const year = document.querySelector(".year");
 
 // Set initial time
@@ -25,7 +27,44 @@ const audioBtnClick = new Audio("audio/pop-sound.mp3");
 const audioAlarm = new Audio("audio/alarm.mp3");
 
 // Set current year
-year.textContent = new Date().getFullYear();
+year.textContent = new Date().getFullYear() + " |";
+
+// Display quotes dynamically
+const quotes = [
+  ["– Mahatma Gandhi", "The future depends on what you do today."],
+  [
+    "– Paul J. Meyer",
+    "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.",
+  ],
+  [
+    "– Steve Jobs",
+    "Your time is limited, so don’t waste it living someone else’s life.",
+  ],
+  [
+    "– Robert Collier",
+    "Success is the sum of small efforts, repeated day-in and day-out.",
+  ],
+  ["– Sam Levenson", "Don’t watch the clock; do what it does. Keep going."],
+  ["– Tim Ferriss", "Focus on being productive instead of busy."],
+  [
+    "– Walt Disney",
+    "The way to get started is to quit talking and begin doing.",
+  ],
+  [
+    "– Zig Ziglar",
+    "You don’t have to be great to start, but you have to start to be great.",
+  ],
+  ["– Unknown", "It’s not about having time. It’s about making time."],
+  [
+    "– Stephen Covey",
+    "The key is not to prioritize what's on your schedule, but to schedule your priorities.",
+  ],
+];
+const displayQuotes = function () {
+  const quoteId = Math.trunc(Math.random() * quotes.length);
+  [quoteAuthor.textContent, quoteText.textContent] = quotes[quoteId];
+};
+setInterval(displayQuotes, 5000);
 
 // Read time from clock
 const getDisplayedTime = function () {

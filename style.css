@@ -89,7 +89,7 @@ a:link {
   margin: 0 auto;
   border-radius: 5px;
   padding: 44px 0;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 .timer-btns-container {
@@ -148,6 +148,36 @@ button {
   box-shadow: none;
 }
 
+/* Quote */
+
+.quote-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 130px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  border-radius: 5px;
+  margin: 30px auto;
+}
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  transition: content 250ms ease-out;
+}
+
+blockquote span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Footer */
+
 footer {
   display: flex;
   justify-content: center;
@@ -157,7 +187,7 @@ footer {
 .footer-text {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 3px;
 }
 
 /* Added programmatically */
