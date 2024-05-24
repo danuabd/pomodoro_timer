@@ -15,6 +15,7 @@ const year = document.querySelector(".year");
 // Set initial time
 let time = 25 * 60;
 let progressBarFill = 0;
+let activeTimer = "work"; // break
 
 // Declare timer in global scope
 let timer;
@@ -43,6 +44,8 @@ const changeTimer = function (btn, bgColor, minute, seconds) {
   timerSeconds.textContent = String(seconds).padStart(2, 0);
   time = minute * 60 + seconds;
   progressBarFill = 0;
+  activeTimer = btn.dataset.type;
+  console.log(activeTimer);
 };
 
 // Starting the timer
@@ -59,6 +62,7 @@ const startTimer = function () {
 
     if (time === 0) {
       clearInterval(timer);
+      switchTimer();
       playSound(1);
     }
   };
@@ -98,6 +102,12 @@ const pauseTimer = function (pausedTimer) {
 const playSound = function (alarm) {
   if (alarm) audioAlarm.play();
   else audioBtnClick.play();
+};
+
+const switchTimer = function () {
+  if (activeTimer === "work") btnShortBreak.click();
+  else btnPomodoro.click();
+  progressBar.style.width = "100%";
 };
 
 // Event listeners
