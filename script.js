@@ -24,7 +24,8 @@ let activeTimer = "work"; // break
 let timer;
 
 // load audio files
-const audioBtnClick = new Audio("audio/pop-sound.mp3");
+const audioSwitchOn = new Audio("audio/switch-on.mp3");
+const audioSwitchOff = new Audio("audio/switch-off.mp3");
 const audioAlarm = new Audio("audio/alarm.mp3");
 
 // Set current year
@@ -103,7 +104,7 @@ const startTimer = function () {
     if (time === 0) {
       clearInterval(timer);
       switchTimer();
-      playSound(1);
+      audioAlarm.play();
     }
   };
 
@@ -136,12 +137,6 @@ const pauseTimer = function () {
     clearInterval(timer);
     time = getDisplayedTime();
   }
-};
-
-// Play sound
-const playSound = function (alarm) {
-  if (alarm) audioAlarm.play();
-  else audioBtnClick.play();
 };
 
 const switchTimer = function () {
@@ -194,13 +189,16 @@ selectionContainer.addEventListener("click", function (e) {
 });
 
 btnStartTimer.addEventListener("click", function (e) {
-  playSound();
-
   // Check condition to pause timer
-  if (e.target.classList.contains("started")) pauseTimer();
-  else {
-    time = 10; // getDisplayedTime();
+  if (e.target.classList.contains("started")) {
+    audioSwitchOff.play();
+    pauseTimer();
+  } else {
+    time = getDisplayedTime(); // 10;
+    audioSwitchOn.play();
     timer = startTimer();
+    audioAlarm.pause();
+    audioAlarm.currentTime = 0;
   }
 
   // Add a class to pause timer when clicked again
