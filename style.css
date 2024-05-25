@@ -201,3 +201,8 @@ footer {
   transform: translateY(5px);
   box-shadow: none;
 }
+
+/* Responsive design */
+
+@media (max-width: 700px) {
+}
