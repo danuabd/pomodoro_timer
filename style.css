@@ -269,7 +269,7 @@ footer {
   }
 }
 
-@media (max-width: 451px) {
+@media (max-width: 426px) {
   .logo {
     font-size: 2rem;
   }
@@ -288,19 +288,19 @@ footer {
   }
 
   .main-container {
-    width: 400px;
-    height: 250px;
+    width: 90%;
+    height: 280px;
     padding: 22px 0;
     margin-bottom: 60px;
   }
 
   .timer-btns-container {
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .btn-timer {
     font-size: 1.4rem;
-    padding: 8px 20px;
+    padding: 8px 18px;
   }
 
   .btn-timer:active {
@@ -321,7 +321,7 @@ footer {
 
   .quote-container {
     height: 16rem;
-    padding: 15px 20px;
+    padding: 10px 20px;
   }
 
   blockquote {
