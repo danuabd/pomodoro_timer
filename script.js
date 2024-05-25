@@ -77,7 +77,7 @@ const getDisplayedTime = function () {
 const changeTimer = function (btn, bgColor, minute, seconds) {
   timerBtns.forEach((btn) => btn.classList.remove("btn-clicked"));
   btn.classList.add("btn-clicked");
-  document.body.style.backgroundColor = bgColor;
+  document.body.style.backgroundImage = bgColor;
   progressBar.style.width = "0%";
   timerMinutes.textContent = String(minute).padStart(2, 0);
   timerSeconds.textContent = String(seconds).padStart(2, 0);
@@ -130,7 +130,7 @@ const changebtnState = function () {
 };
 
 // Pause the timer
-const pauseTimer = function (pausedTimer) {
+const pauseTimer = function () {
   if (timer) {
     clearInterval(timer);
     time = getDisplayedTime();
@@ -162,11 +162,26 @@ selectionContainer.addEventListener("click", function (e) {
   changebtnState();
 
   if (e.target.classList.contains("pomodoro")) {
-    changeTimer(e.target, "rgb(186, 73, 73)", 25, 0);
+    changeTimer(
+      e.target,
+      `linear-gradient(135deg, #ff9d6c 10%, #bb4e75 100%)`,
+      25,
+      0
+    );
   } else if (e.target.classList.contains("short-break")) {
-    changeTimer(e.target, "rgb(56, 133, 138)", 5, 0);
+    changeTimer(
+      e.target,
+      `linear-gradient(135deg, #79f1a4 10%, #0e5cad 100%)`,
+      5,
+      0
+    );
   } else if (e.target.classList.contains("long-break")) {
-    changeTimer(e.target, "rgb(57, 112, 151)", 15, 0);
+    changeTimer(
+      e.target,
+      `linear-gradient(135deg, #52e5e7 10%, #130cb7 100%)`,
+      15,
+      0
+    );
   }
 });
 
