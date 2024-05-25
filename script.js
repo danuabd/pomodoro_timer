@@ -1,6 +1,7 @@
 "use strict";
 
 // Select elements
+const favicon = document.querySelector("link[rel*='icon']");
 const selectionContainer = document.querySelector(".timer-btns-container");
 const btnPomodoro = document.querySelector(".pomodoro");
 const timerBtns = document.querySelectorAll(".btn-timer");
@@ -78,18 +79,18 @@ const changeTimer = function (btn, bgColor, minute, seconds) {
   timerBtns.forEach((btn) => btn.classList.remove("btn-clicked"));
   btn.classList.add("btn-clicked");
   document.body.style.backgroundImage = bgColor;
-  progressBar.style.width = "0%";
+  // progressBar.style.width = "0%";
   timerMinutes.textContent = String(minute).padStart(2, 0);
   timerSeconds.textContent = String(seconds).padStart(2, 0);
   time = minute * 60 + seconds;
   progressBarFill = 0;
   activeTimer = btn.dataset.type;
-  console.log(activeTimer);
 };
 
 // Starting the timer
 const startTimer = function () {
   const fill = 100 / time;
+  document.title = "Timer started!";
   const tick = function () {
     time--;
     let minute = String(Math.trunc(time / 60));
@@ -144,9 +145,16 @@ const playSound = function (alarm) {
 };
 
 const switchTimer = function () {
-  if (activeTimer === "work") btnShortBreak.click();
-  else btnPomodoro.click();
-  progressBar.style.width = "100%";
+  if (activeTimer === "work") {
+    btnShortBreak.click();
+    document.title = "Take a break!";
+    favicon.attributes.href.nodeValue = "icon-break.svg";
+  } else {
+    progressBar.style.width = "100%";
+    btnPomodoro.click();
+    document.title = "Time to focus!";
+    favicon.attributes.href.nodeValue = "icon-pomodoro.svg";
+  }
 };
 
 // Event listeners
@@ -191,7 +199,7 @@ btnStartTimer.addEventListener("click", function (e) {
   // Check condition to pause timer
   if (e.target.classList.contains("started")) pauseTimer();
   else {
-    time = getDisplayedTime();
+    time = 10; // getDisplayedTime();
     timer = startTimer();
   }
 
